@@ -1,7 +1,7 @@
 export const navItems = [
     { label: "Dashboard", href: "#"},
     { label: "Contact", href: "#"},
-    { label: "History", href: "#"},
+    { label: "History", href: "History"},
 ]
 
 export const resourcesLinks = [

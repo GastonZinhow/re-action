@@ -18,6 +18,12 @@ const MainPage = () => {
   const [startTime, setStartTime] = useState(null);
   const [showGraph, setShowGraph] = useState(false);
 
+  const saveToHistory = (newEntry) => {
+    const history = JSON.parse(localStorage.getItem("reactionHistory")) || [];
+    history.push(newEntry);
+    localStorage.setItem("reactionHistory", JSON.stringify(history));
+  };
+
   const resetTest = () => {
     setStarted(false);
     setFlashCount(0);
@@ -32,10 +38,11 @@ const MainPage = () => {
     const reactionTimes = [];
 
     for (let i = 0; i < 5; i++) {
-      const delay = Math.random() * 2000 + 1000; // 1 a 3 segundos
+      const delay = Math.random() * 2000 + 1000;
       await new Promise((res) => setTimeout(res, delay));
 
       setFlashing(true);
+      await new Promise((resolve) => requestAnimationFrame(resolve));
       const start = performance.now();
 
       const result = await new Promise((resolve) => {
@@ -54,13 +61,18 @@ const MainPage = () => {
 
     setTimes(reactionTimes);
     setShowGraph(true);
+    saveToHistory({
+      date: new Date().toISOString(),
+      times: reactionTimes.map((t) => Math.round(t)),
+      average: Math.round(average(reactionTimes)),
+    });
   };
 
   const average = (arr) => arr.reduce((a, b) => a + b, 0) / arr.length;
 
   return (
     <div
-      className={`flex flex-col items-center mt-6 lg:mt-20 transition duration-200 w-full h-screen ${
+      className={`flex flex-col items-center mt-6 lg:mt-20 w-full h-screen ${
         flashing ? "bg-green-500" : "bg-red"
       }`}
     >
