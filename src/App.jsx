@@ -14,8 +14,8 @@ function App() {
 
         <div className="flex-grow">
           <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/history" element={<History />} />
+            <Route path="/re-action" element={<MainPage />} />
+            <Route path="/re-action/history" element={<History />} />
           </Routes>
         </div>
 
