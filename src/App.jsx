@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import MainPage from "./components/MainPage";
@@ -14,8 +14,8 @@ function App() {
 
         <div className="flex-grow">
           <Routes>
-            <Route path="/re-action" element={<MainPage />} />
-            <Route path="/re-action/history" element={<History />} />
+            <Route path="/" element={<MainPage />} />
+            <Route path="/history" element={<History />} />
           </Routes>
         </div>
 
