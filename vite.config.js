@@ -6,5 +6,5 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(),
   tailwindcss()],
-  base: "/re-action/",
+  base: process.env.VITE_BASE_PATH || "/re-action"
 })
